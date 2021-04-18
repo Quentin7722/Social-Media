@@ -1,0 +1,51 @@
+import React, { useState } from "react";
+import "./Navbar.css";
+import ReorderIcon from "@material-ui/icons/Reorder";
+import logo from '../assets/icon-left-font-monochrome-white.png';
+import { useHistory } from "react-router-dom";
+
+
+function Navbar(props) {
+
+  let history = useHistory();
+  const [showLinks, setshowLinks] = useState(false);
+  
+  const disconnect = () => {
+
+    localStorage.setItem("loggedIn", "false");
+    localStorage.removeItem("username");
+    localStorage.removeItem("token");
+    history.push("/");
+  };
+
+  return (
+    <div className="Navbar">
+      <img className="navbar-img" src={logo} alt="Logo" />
+      <div className="right-side">
+        <div className="links" id={showLinks ? "hidden" : ""}>
+          <a href="/">Forum</a>
+          {props.isLoggedIn ? ( // Opérateur ternaire
+            <>
+              <a href="/upload">Publier</a>
+              <a href="/profile">Profil</a>
+              <button className="btn-disconnect" onClick={disconnect}>Se déconecter</button>
+            </>
+          ) : (
+            <>
+              <a href="/register">Inscription</a>
+              <a href="/login">Connexion</a>
+            </>
+          )}
+          {props.userRole === "moderateur" && (
+            <>
+            <a href="/moderateur">Gérer les publications</a>
+            </>
+          )}
+        </div>
+        <button className="btn-menu" aria-label="Bouton du menu" onClick={() => setshowLinks(!showLinks)}><ReorderIcon /></button>
+      </div>
+    </div>
+  );
+}
+
+export default Navbar;

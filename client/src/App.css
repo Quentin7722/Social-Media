@@ -1,0 +1,17 @@
+.App {
+  text-align: center;
+  width: 100vw;
+  height: 100vh;
+}
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+body {
+  padding: 0;
+  margin: 0;
+  background-image: linear-gradient(to bottom, #05022c, #262a58, #4b4f89, #7177bd, #9aa2f4);
+  background-attachment:fixed;
+}
+
