@@ -119,8 +119,7 @@ function Home(props) {
           return (
             <div className="Post" key={val.idthread}>
               <div className="Content">
-                <div className="title">
-                  {" "}
+                <div className="title-txt">
                   {val.title} / publié par {val.author} le {val.date.slice(0, 10)}
                 </div>
                 <div className="description">{val.description}</div>

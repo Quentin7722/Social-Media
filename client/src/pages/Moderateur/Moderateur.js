@@ -20,7 +20,7 @@ function Moderateur() {
     });
   }, []);
 
-  const deleteThread = (image, idthread, key) => {
+  const deleteThread = (idthread,image ) => {
     Axios.delete("http://localhost:3001/thread/delete", {
       headers: { 'Authorization': `bearer ${token}` },
       data: {
@@ -29,7 +29,6 @@ function Moderateur() {
         image: image
       }
     }).then((response) => {
-      console.log(response);
       setYourUploads(response.data);
     });
   };
@@ -44,7 +43,7 @@ function Moderateur() {
       {yourUploads.map((val, key) => {
         if (val.image) {
           return (
-            <div className="moderateur">
+            <div className="moderateur" key={val.idthread}>
               <div className="Post">
                 <div className="Image">
                   <Image alt= {val.title} cloudName="dzbs5syc9" publicId={val.image} />
@@ -68,11 +67,10 @@ function Moderateur() {
           );
         } else {
           return (
-            <div className="moderateur">
+            <div className="moderateur" key={val.idthread}>
               <div className="Post">
                 <div className="Content">
                   <div className="title">
-                    {" "}
                     {val.title} / publié par {val.author} le {val.date.slice(0, 10)}
                   </div>
                   <div className="description">{val.description}</div>

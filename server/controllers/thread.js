@@ -111,15 +111,14 @@ exports.delete = (req, res) => {
     "SELECT * FROM thread WHERE author = ? AND idthread = ?;",
     [userName, idthread],
     (err, results) => {
-      console.log(err, results, results[0].author);
+      console.log("Selected Thread", err, results);
       if (req.user.role == "moderateur" || userName == results[0].author) {
         cloudinary.uploader.destroy(publicId, function (result) { console.log(result) })
-
         db.query(
           "DELETE FROM thread WHERE idthread = ?;",
           idthread,
           (err, results) => {
-            console.log(err, results);
+            console.log("Deleted Thread", err, results);
           });
         db.query(
           "SELECT * FROM thread WHERE author = ?;",

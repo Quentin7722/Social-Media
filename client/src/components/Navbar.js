@@ -11,7 +11,7 @@ function Navbar(props) {
   const [showLinks, setshowLinks] = useState(false);
   
   const disconnect = () => {
-
+    localStorage.removeItem("role");
     localStorage.setItem("loggedIn", "false");
     localStorage.removeItem("username");
     localStorage.removeItem("token");
