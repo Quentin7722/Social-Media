@@ -36,7 +36,14 @@
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 
 }
-
+.icon-delete{
+    color: red;
+    padding: 12px 0 0 10px;
+    border: none;
+    cursor: pointer;
+    outline: none;
+}
+.icon-delete:hover {animation: wiggle 3s infinite;} 
 .moderateur .Post .Content .title {
     flex: 30%;
     text-align: center;
@@ -135,6 +142,13 @@
     display: flex;
 }
 
+@keyframes wiggle{
+    0%{transform: rotate(0deg);}
+    3%{transform: rotate(-8deg);}
+    4%{transform: rotate(8deg);}
+    5%{transform: rotate(0deg);}
+    100%{transform: rotate(0deg);}
+}
 
 @media screen and (min-width: 300px) and (max-width: 650px){
     .moderateur .Post .Content .title{

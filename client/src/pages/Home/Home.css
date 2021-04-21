@@ -113,6 +113,7 @@
 .img-comment{
     height: 30px;
     margin-right: 10px;
+    border-radius: 30px;
 }
 .send-com{
     margin-bottom: 15px;

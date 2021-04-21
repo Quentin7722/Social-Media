@@ -50,13 +50,10 @@ exports.comment = (req, res) => {
     (err, results) => {
       console.log(results, err);
     });
-  db.query(
-    "SELECT * FROM comments WHERE threadcomment = ?;",
-    threadcomment,
-    (err, results) => {
-      console.log(err);
-      res.send(results);
-    });
+  db.query('SELECT user.avatar, comments.usercomment, comments.comment  FROM comments INNER JOIN user ON comments.usercomment = user.username WHERE threadcomment = ?;SELECT * FROM thread;', [threadcomment], function (err, results) {
+    if (err) throw err;
+    res.send(results);
+  });
 };
 
 exports.getAllThreads = (req, res) => {
@@ -68,39 +65,38 @@ exports.getAllThreads = (req, res) => {
 
 exports.getComments = (req, res) => {
   const threadcomment = req.body.idthread;
-  db.query("SELECT * FROM comments where threadcomment = ?;",
-    threadcomment,
-    (err, results) => {
-      console.log(err);
-      res.send(results);
-    });
+  db.query('SELECT user.avatar, comments.usercomment, comments.comment, comments.idcomments  FROM comments INNER JOIN user ON comments.usercomment = user.username WHERE threadcomment = ?;', [threadcomment], function (err, results) {
+    if (err) throw err;
+    res.send(results);
+  });
 };
 
 exports.deleteComment = (req, res) => {
-  const idcomment = req.body.idcomment;
-  threadcomment = req.body.idthread;
-
+  const userName = req.user.userName;
+  const idComment = req.body.idcomments;
+  const threadComment = req.body.threadComment
   db.query(
-    "DELETE FROM comments WHERE idcomments = ?;",
-    idcomment,
+    "SELECT * FROM comments WHERE idcomments = ?;",
+    idComment,
     (err, results) => {
-      console.log(err, results);
-    });
-  db.query(
-    "UPDATE thread SET commentcount = commentcount - 1 WHERE idthread = ?;",
-    threadcomment,
-    (err, results) => {
-      console.log(results, err);
-    });
+      if (req.user.role == "moderateur" || userName == results[0].usercomment) {
+        db.query('DELETE FROM comments WHERE idcomments = ?; UPDATE thread SET commentcount = commentcount - 1 WHERE idthread = ?;SELECT user.avatar, comments.usercomment, comments.comment, comments.idcomments  FROM comments INNER JOIN user ON comments.usercomment = user.username WHERE threadcomment = ?;SELECT * FROM thread;',
+          [idComment, threadComment, threadComment],
+          function (err, results) {
+            if (err) throw err;
+            res.send(results);
+          });
+      }
+    })
 };
 
 exports.getProfileThreads = (req, res) => {
   const userName = req.user.userName;
-  db.query('SELECT * FROM thread where author = ?;SELECT avatar FROM user where username = ?;', [userName, userName], function(err, results) {
-    if (err) throw err;  
+  db.query('SELECT * FROM thread where author = ?; SELECT avatar FROM user where username = ?;', [userName, userName], function (err, results) {
+    if (err) throw err;
     res.send(results);
   });
-  
+
 };
 
 exports.delete = (req, res) => {
@@ -108,25 +104,16 @@ exports.delete = (req, res) => {
   const userName = req.user.userName;
   const publicId = req.body.image;
   db.query(
-    "SELECT * FROM thread WHERE author = ? AND idthread = ?;",
-    [userName, idthread],
+    "SELECT * FROM thread WHERE idthread = ?;",
+    idthread,
     (err, results) => {
-      console.log("Selected Thread", err, results);
+      console.log(err, results);
       if (req.user.role == "moderateur" || userName == results[0].author) {
         cloudinary.uploader.destroy(publicId, function (result) { console.log(result) })
-        db.query(
-          "DELETE FROM thread WHERE idthread = ?;",
-          idthread,
-          (err, results) => {
-            console.log("Deleted Thread", err, results);
-          });
-        db.query(
-          "SELECT * FROM thread WHERE author = ?;",
-          userName,
-          (err, results) => {
-            console.log(err);
-            res.send(results);
-          });
+        db.query('DELETE FROM thread WHERE idthread = ?; DELETE FROM comments WHERE threadcomment =?; DELETE FROM likes WHERE threadid =?; SELECT * FROM thread WHERE author = ?', [idthread, idthread, idthread, userName], function (err, results) {
+          if (err) throw err;
+          res.send(results[3]);
+        });
       }
     })
 };

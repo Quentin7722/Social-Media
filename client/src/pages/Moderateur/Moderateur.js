@@ -4,11 +4,17 @@ import { Image } from "cloudinary-react";
 import "./Moderateur.css";
 import avatar from 'C:/Users/quent/Desktop/Projet 7/client/src/assets/avatar.png';
 import ThumbUpAltIcon from "@material-ui/icons/ThumbUpAlt";
+import ChatIcon from '@material-ui/icons/Chat';
+import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 
 function Moderateur() {
+  
+  const [showId, setShowId] = useState(null);
   const [yourUploads, setYourUploads] = useState([]);
   const token = localStorage.getItem("token");
   const username = localStorage.getItem("username");
+  const toggleComments = (idthread) => { setShowId(showId => showId === idthread ? null : idthread); };
+  const [threadComments, setThreadcomments] = useState([]);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -20,7 +26,7 @@ function Moderateur() {
     });
   }, []);
 
-  const deleteThread = (idthread,image ) => {
+  const deleteThread = (idthread, image) => {
     Axios.delete("http://localhost:3001/thread/delete", {
       headers: { 'Authorization': `bearer ${token}` },
       data: {
@@ -30,6 +36,31 @@ function Moderateur() {
       }
     }).then((response) => {
       setYourUploads(response.data);
+    });
+  };
+
+  const getComment = (idthread) => {
+    Axios.post("http://localhost:3001/thread/getComments", {
+      idthread: idthread,
+    }, {
+      headers: {
+        'Authorization': `bearer ${token}`
+      }
+    }).then((response) => {
+      setThreadcomments(response.data);
+    });
+  };
+
+  const deleteComment = (idcomment, threadComment) => {
+    Axios.delete("http://localhost:3001/thread/deleteComment", {
+      headers: { 'Authorization': `bearer ${token}` },
+      data: {
+        idcomments: idcomment,
+        threadComment: threadComment,
+      }
+    }).then((response) => {
+      setThreadcomments(response.data[2]);
+      setYourUploads(response.data[3])
     });
   };
 
@@ -46,7 +77,7 @@ function Moderateur() {
             <div className="moderateur" key={val.idthread}>
               <div className="Post">
                 <div className="Image">
-                  <Image alt= {val.title} cloudName="dzbs5syc9" publicId={val.image} />
+                  <Image alt={val.title} cloudName="dzbs5syc9" publicId={val.image} />
                 </div>
                 <div className="Content">
                   <div className="title">
@@ -57,11 +88,29 @@ function Moderateur() {
                   <div className="Engagement">
                     <ThumbUpAltIcon id="likeButton" />
                     {val.likecount}
+                    <ChatIcon id="commentButton" onClick={function (event) { toggleComments(val.idthread); getComment(val.idthread); }} />
+                    <div className="counts">{val.commentcount}</div>
                   </div>
+                  {showId === val.idthread && (
+                    <div className="comments">
+                      {threadComments.map((com, index) => {
+                        return (
+                          <div key={index} className="post-bottom">
+                            {com.avatar === null && (<img className="img-comment" src={avatar} alt="Logo" />)}
+                            {com.avatar != null && (<Image alt="avatar" cloudName="dzbs5syc9" publicId={com.avatar} className="img-comment" />)}
+                            <div className="comment">
+                              <p className="userComment">{com.usercomment}</p>
+                              <p>{com.comment}</p>
+                            </div>
+                            <button className="icon-delete" onClick={() =>{ deleteComment(com.idcomments, val.idthread) } }><DeleteForeverIcon/></button>
+                          </div>)
+                      })}
+                    </div>
+                  )}
                 </div>
               </div>
               <div className="buttons">
-              <button className="btn-post" onClick={() => { deleteThread(val.idthread, key); }}>Supprimer</button>
+                <button className="btn-post" onClick={() => { deleteThread(val.idthread, key) }}>Supprimer</button>
               </div>
             </div>
           );
@@ -77,11 +126,29 @@ function Moderateur() {
                   <div className="Engagement">
                     <ThumbUpAltIcon id="likeButton" />
                     {val.likecount}
+                    <ChatIcon id="commentButton" onClick={function (event) { toggleComments(val.idthread); getComment(val.idthread); }} />
+                    <div className="counts">{val.commentcount}</div>
                   </div>
+                  {showId === val.idthread && (
+                    <div className="comments">
+                      {threadComments.map((com, index) => {
+                        return (
+                          <div key={index} className="post-bottom">
+                            {com.avatar === null && (<img className="img-comment" src={avatar} alt="Logo" />)}
+                            {com.avatar != null && (<Image alt="avatar" cloudName="dzbs5syc9" publicId={com.avatar} className="img-comment" />)}
+                            <div className="comment">
+                              <p className="userComment">{com.usercomment}</p>
+                              <p>{com.comment}</p>
+                            </div>
+                            <button className="icon-delete" onClick={() =>{ deleteComment(com.idcomments, val.idthread) } }><DeleteForeverIcon/></button>
+                          </div>)
+                      })}
+                    </div>
+                  )}
                 </div>
               </div>
               <div className="buttons">
-              <button className="btn-post" onClick={() => { deleteThread(val.idthread, key); }}>Supprimer</button>
+                <button className="btn-post" onClick={() => { deleteThread(val.idthread, key); }}>Supprimer</button>
               </div>
             </div>
           );

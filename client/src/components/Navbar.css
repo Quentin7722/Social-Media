@@ -58,6 +58,7 @@
    
 }
 @media screen and (min-width: 300px) and (max-width: 650px) {
+   
     .Navbar .links {
         display: none;
     }

@@ -11,7 +11,7 @@ router.delete("/delete", auth, threadCtrl.delete);
 router.post("/like", auth, threadCtrl.like);
 router.post("/comment", auth, threadCtrl.comment);
 router.post("/getComments", threadCtrl.getComments);
-router.delete("/deleteComment", threadCtrl.deleteComment);
+router.delete("/deleteComment", auth, threadCtrl.deleteComment);
 router.post("/modify", auth, threadCtrl.modifyThread);
 
 

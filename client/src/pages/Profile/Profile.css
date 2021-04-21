@@ -225,6 +225,16 @@
 }
 
 @media screen and (min-width: 300px) and (max-width: 650px){
+    .btn-profile{
+        margin-left: 15px;
+    }
+    .Profile h1{
+        margin-left: 15px;
+        font-size: 25px;
+    }
+    .label-file{
+        opacity: 1;
+    }
     .Profile .Post .Content .title{
         font-size: 18px;
     }

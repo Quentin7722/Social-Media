@@ -9,7 +9,7 @@ function Navbar(props) {
 
   let history = useHistory();
   const [showLinks, setshowLinks] = useState(false);
-  
+
   const disconnect = () => {
     localStorage.removeItem("role");
     localStorage.setItem("loggedIn", "false");
@@ -28,17 +28,17 @@ function Navbar(props) {
             <>
               <a href="/upload">Publier</a>
               <a href="/profile">Profil</a>
-              <button className="btn-disconnect" onClick={disconnect}>Se déconecter</button>
+              {props.userRole === "moderateur" && (
+                <>
+                  <a href="/moderateur">Gérer les publications</a>
+                </>
+              )}
+              <button className="btn-disconnect" onClick={disconnect}>Se déconnecter</button>
             </>
           ) : (
             <>
               <a href="/register">Inscription</a>
               <a href="/login">Connexion</a>
-            </>
-          )}
-          {props.userRole === "moderateur" && (
-            <>
-            <a href="/moderateur">Gérer les publications</a>
             </>
           )}
         </div>
