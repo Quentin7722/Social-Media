@@ -1,8 +1,9 @@
 .Home h1{
     color: rgb(155, 183, 209);
+    font-family: 'Oleo Script', cursive;
 }
 .Home {
-    padding-top: 50px;
+    padding-top: 100px;
     width: 100%;
     height: auto;
     display: flex;
@@ -42,7 +43,11 @@
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 
 }
-
+.Home .msg-err{
+    color: red;
+    text-align: left;
+    font-size: 15px;
+}
 .Home .Post .Content .title, .title-txt {
     flex: 30%;
     text-align: center;

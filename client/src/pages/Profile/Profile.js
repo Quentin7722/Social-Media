@@ -2,7 +2,7 @@ import Axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Image } from "cloudinary-react";
 import "./Profile.css";
-import avatarDefault from 'C:/Users/quent/Desktop/Projet 7/client/src/assets/avatar.png';
+import avatarDefault from '../../assets/avatar.png';
 import ThumbUpAltIcon from "@material-ui/icons/ThumbUpAlt";
 
 function Profile() {

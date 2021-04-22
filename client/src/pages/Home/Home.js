@@ -4,13 +4,14 @@ import { Image } from "cloudinary-react";
 import Axios from "axios";
 import ThumbUpAltIcon from "@material-ui/icons/ThumbUpAlt";
 import ChatIcon from '@material-ui/icons/Chat';
-import avatar from 'C:/Users/quent/Desktop/Projet 7/client/src/assets/avatar.png';
+import avatar from '../../assets/avatar.png';
 
 function Home(props) {
   const [showId, setShowId] = useState(null);
   const [uploads, setUploads] = useState([]);
   const [threadComments, setThreadcomments] = useState([]);
   const [commentaire, setComments] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
   const token = localStorage.getItem("token");
   const toggleComments = (idthread) => { setShowId(showId => showId === idthread ? null : idthread); };
 
@@ -35,7 +36,7 @@ function Home(props) {
   };
 
   const comment = (idthread) => {
-    if (1) {
+    if (checkTextInput() === true) {
       Axios.post("http://localhost:3001/thread/comment", {
         idthread: idthread,
         commentaire: commentaire,
@@ -64,6 +65,15 @@ function Home(props) {
     });
   };
 
+  const checkTextInput = () => {
+    if (!commentaire.trim()) {
+      setErrorMessage("Veuillez remplir le champ");
+      return false;
+    } else {
+      setErrorMessage(null);
+      return true;
+    }
+  };
 
 
   return (
@@ -101,6 +111,7 @@ function Home(props) {
                           setComments(event.target.value);
                         }} />
                       <button className="btn-comment" onClick={() => { comment(val.idthread); setComments("") }}>Envoyer</button>
+                      <p className="msg-err">{errorMessage} </p>
                     </div>
                   ) : (null)}
                   {threadComments.map((com, index) => {
@@ -146,6 +157,7 @@ function Home(props) {
                           setComments(event.target.value);
                         }} />
                       <button className="btn-comment" onClick={() => { comment(val.idthread); setComments("") }}>Envoyer</button>
+                      <p className="msg-err">{errorMessage} </p>
                     </div>
                   ) : (null)}
                   {threadComments.map((com, index) => {

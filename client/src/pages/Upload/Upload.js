@@ -52,13 +52,17 @@ function Upload() {
   };
   
   const checkTextInput = () => {
-    if (!title.trim()) {
+    if(!title.trim() && !description.trim()){
+      setErrorMessage("Les champs titre et description sont vides");
+      return false;
+    } else if (!title.trim()) {
       setErrorMessage("Le champ titre est vide");
       return false;
     } else if (!description.trim()) {
       setErrorMessage("Le champ description est vide");
       return false;
     } else {
+      setErrorMessage(null)
       return true;
     }
   };

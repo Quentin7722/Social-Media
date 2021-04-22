@@ -2,7 +2,7 @@ import Axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Image } from "cloudinary-react";
 import "./Moderateur.css";
-import avatar from 'C:/Users/quent/Desktop/Projet 7/client/src/assets/avatar.png';
+import avatar from '../../assets/avatar.png';
 import ThumbUpAltIcon from "@material-ui/icons/ThumbUpAlt";
 import ChatIcon from '@material-ui/icons/Chat';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';

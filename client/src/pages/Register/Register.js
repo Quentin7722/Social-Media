@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./Register.css";
-import background from 'C:/Users/quent/Desktop/Projet 7/client/src/assets/icon.png';
+import background from '../../assets/icon.png';
 import Axios from "axios";
 import { useHistory } from "react-router-dom";
 
@@ -31,8 +31,11 @@ function Register() {
 
 
   const checkTextInput = () => {
-    if (!username.trim()) {
-      setErrorMessage("Le champ nom d'utilisateur est vide");
+    if (!username.trim() && !password.trim()) {
+      setErrorMessage("Les champs sont vides");
+      return false;
+    } else if (!username.trim()) {
+      setErrorMessage("Le champ nom d'utilisateur est vide")
       return false;
     } else if (!password.trim()) {
       setErrorMessage("Le champ mot de passe est vide");
