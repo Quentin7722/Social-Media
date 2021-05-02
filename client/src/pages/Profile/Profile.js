@@ -4,6 +4,7 @@ import { Image } from "cloudinary-react";
 import "./Profile.css";
 import avatarDefault from '../../assets/avatar.png';
 import ThumbUpAltIcon from "@material-ui/icons/ThumbUpAlt";
+import { useHistory } from "react-router-dom";
 
 function Profile() {
   const [yourUploads, setYourUploads] = useState([]);
@@ -17,17 +18,19 @@ function Profile() {
   const [avatar, setAvatar] = useState([]);
   const [checkNewAvatar, setcheckNewAvatar] = useState(true);
   const [newAvatar, setnewAvatar] = useState("");
-  
+
+  let history = useHistory();
+
   useEffect(() => {
     const token = localStorage.getItem("token");
     Axios.get(`http://localhost:3001/thread/byUser/${localStorage.getItem("username")}`, {
       headers: { 'Authorization': `bearer ${token}` }
     }).then((response) => {
       setYourUploads(response.data[0]);
-      if (response.data[1][0].avatar == null) {  
+      if (response.data[1][0].avatar == null) {
         setcheckNewAvatar(false)
-      }else{
-        setnewAvatar(response.data[1][0].avatar)  
+      } else {
+        setnewAvatar(response.data[1][0].avatar)
       }
     });
   }, []);
@@ -49,14 +52,14 @@ function Profile() {
           headers: {
             'Authorization': `bearer ${token}`
           }
-        }).then((response) =>{
+        }).then((response) => {
           setnewAvatar(response.data[0].avatar)
         })
       });
     }
   }, [avatar]);
 
-  
+
   const deleteThread = (image, idthread) => {
     Axios.delete("http://localhost:3001/thread/delete", {
       headers: { 'Authorization': `bearer ${token}` },
@@ -73,9 +76,12 @@ function Profile() {
   const deleteProfile = () => {
     Axios.delete("http://localhost:3001/user/delete", {
       headers: { 'Authorization': `bearer ${token}` },
-      data: { username: username }
     }).then((response) => {
-      console.log(response);
+      localStorage.removeItem("role");
+      localStorage.setItem("loggedIn", "false");
+      localStorage.removeItem("username");
+      localStorage.removeItem("token");
+      history.push("/");
     });
   };
 
@@ -114,8 +120,8 @@ function Profile() {
   };
 
   return (
-    <div className="Profile">
-      <div className="profile-top">
+    <main className="Profile">
+      <article className="profile-top">
         <div className="user-info">
           {checkNewAvatar ? (<Image alt="Avatar" cloudName="dzbs5syc9" publicId={newAvatar} className="img-profile" />) : (<img className="img-profile" src={avatarDefault} alt="Default Avatar" />)}
           <h1>{localStorage.getItem("username")}</h1>
@@ -125,16 +131,16 @@ function Profile() {
           <label htmlFor="file" className="label-file">Changer d'avatar</label>
           <input id="file" type="file" onChange={(e) => setAvatar(e.target.files)} className="input-avatar"></input>
         </div>
-      </div>
+      </article>
       <h2>Vos publications :</h2>
       {yourUploads.map((val) => {
         console.log("val", val)
         if (val.image) {
           return (
-            <div className="thread-profile" key={val.idthread}>
+            <article className="thread-profile" key={val.idthread}>
               <div className="Post">
                 <div className="Image">
-                  <Image alt={val.title} cloudName="dzbs5syc9" publicId={val.image} />
+                  <Image alt={"Image de l'article " + val.title} cloudName="dzbs5syc9" publicId={val.image} />
                 </div>
                 <div className="Content">
                   <div className="title">
@@ -172,11 +178,11 @@ function Profile() {
                   <p className="msg-err">{errorMessage}</p>
                 </div>
               )}
-            </div>
+            </article>
           );
         } else {
           return (
-            <div className="thread-profile" key={val.idthread}>
+            <article className="thread-profile" key={val.idthread}>
               <div className="Post">
                 <div className="Content">
                   <div className="title">
@@ -214,11 +220,11 @@ function Profile() {
                   <p className="msg-err">{errorMessage}</p>
                 </div>
               )}
-            </div>
+            </article>
           );
         }
       })}
-    </div>
+    </main>
   );
 }
 

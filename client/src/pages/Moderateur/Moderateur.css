@@ -37,13 +37,13 @@
 
 }
 .icon-delete{
-    color: red;
+    color: rgb(231, 4, 4);
     padding: 12px 0 0 10px;
     border: none;
     cursor: pointer;
     outline: none;
 }
-.icon-delete:hover {animation: wiggle 3s infinite;} 
+.icon-delete:hover,.icon-delete:focus  {animation: wiggle 3s infinite;} 
 .moderateur .Post .Content .title {
     flex: 30%;
     text-align: center;
@@ -52,7 +52,7 @@
 .img-moderateur{
     height:60px;
     border-radius: 30px;
-    margin-right: 40px;
+    margin-right: 20px;
 }
 .moderateur .Post .Content .description {
     flex: 50%;
@@ -86,7 +86,7 @@
     border-radius: 25px;
     cursor: pointer;
     border: none;
-    background-color: red;
+    background-color: rgb(231, 4, 4);
     color: white;
     padding: 13px;
     font-size: 20px;
@@ -113,13 +113,10 @@
     border-radius: 35px;
     margin-left: 40PX;
 }
-.btn-moderateur:hover, .btn-post:hover, .btn-update:hover{
-    cursor: pointer;
-    transform: scale(1.1);
-}
 
 .moderateur h1{
-    color: aliceblue;
+    color: rgb(0 23 45);
+    font-family: 'Oleo Script', cursive;
     margin-top: 10px;
 }
 .moderateur h2{

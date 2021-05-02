@@ -19,9 +19,9 @@ function Navbar(props) {
   };
 
   return (
-    <div className="Navbar">
-      <img className="navbar-img" src={logo} alt="Logo" />
-      <div className="right-side">
+    <header className="Navbar">
+      <img className="navbar-img" src={logo} alt="Logo de l'entreprise" />
+      <nav className="right-side">
         <div className="links" id={showLinks ? "hidden" : ""}>
           <a href="/">Forum</a>
           {props.isLoggedIn ? ( // Opérateur ternaire
@@ -43,8 +43,8 @@ function Navbar(props) {
           )}
         </div>
         <button className="btn-menu" aria-label="Bouton du menu" onClick={() => setshowLinks(!showLinks)}><ReorderIcon /></button>
-      </div>
-    </div>
+      </nav>
+    </header>
   );
 }
 

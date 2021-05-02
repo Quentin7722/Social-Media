@@ -47,35 +47,34 @@
 #hidden{
     display: flex;
 }
-@media screen and (min-width: 651px) and (max-width: 760px) {
-    .Navbar a {
+@media screen and (min-width: 668px) and (max-width: 800px) {
+    .Navbar a, .btn-disconnect {
         font-size: 18px;
     }
     .navbar-img{
         width: 150px;
         height: 150px;
-    }
-   
+    } 
 }
-@media screen and (min-width: 300px) and (max-width: 650px) {
+@media screen and (min-width: 300px) and (max-width: 667px) {
    
     .Navbar .links {
         display: none;
     }
-    .Navbar .links a{
+    .Navbar .links a, .btn-disconnect{
         border-style: solid;
         border-top: none;
         border-color: #0c0c2c;
         width: 100%;
         margin: 0;
         font-size: 30px;
-        padding: 60px;
+        padding: 60px!important;
         color: rgb(255, 255, 255);
-        background-color: #0d0d41;
+        background-color: #0d0d41!important;
         opacity: 1;
     }
-    .Navbar .links a:hover{
-      background-color: darkblue;
+    .Navbar .links a:hover, .btn-disconnect:hover{
+      background-color: darkblue!important;
     }
     .navbar-img{
         width: 200px;

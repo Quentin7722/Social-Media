@@ -68,17 +68,21 @@ function Upload() {
   };
 
   return (
-    <div className="Upload">
-      <div className="UploadForm">
+    <main className="Upload">
+      <article className="UploadForm">
       <h1>Publier un article</h1>
+      <label className="label-img" htmlFor="input-title">Choisir un titre</label>
         <input
+          id="input-title"
           type="text"
           placeholder="Titre..."
           onChange={(event) => {
             setTitle(event.target.value);
           }}
         />
+        <label className="label-img" htmlFor="textarea-description">Choisir une description</label>
         <textarea
+          id="textarea-description"
           className="description-input"
           type="text"
           placeholder="Description..."
@@ -89,10 +93,10 @@ function Upload() {
         </textarea>
         <label className="label-img" htmlFor="file">Choisir une image</label>
         <input id ="file" className="img-input" type="file" onChange={(e) => setImage(e.target.files)} />
-        <button onClick={upload}>Publier</button>
-      </div>
+        <button value="Publication" onClick={upload}>Publier</button>
+      </article>
       <p className="msg-err">{errorMessage} </p>
-    </div>
+    </main>
   );
 }
 

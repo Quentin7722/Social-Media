@@ -31,7 +31,7 @@ function Login() {
       });
     }
   };
-
+  
   const checkTextInput = () => {
     if (!username.trim() && !password.trim()) {
       setErrorMessage("Les champs sont vides");
@@ -48,28 +48,33 @@ function Login() {
   };
 
   return (
-    <div className="Login">
-      <img className="navbar-img" src={background} alt="Logo" />
+    <main className="Login">
+      <img className="navbar-img" src={background} alt="Logo de Groupomania" />
       <h1>Connexion</h1>
       <div className="LoginForm">
+        <label className="label-img" htmlFor="input-username-login">Remplir le champ du nom d'utilisateur</label>
         <input
+          id="input-username-login"
           type="text"
+          autoComplete="on"
           placeholder="Nom d'utilisateur..."
           onChange={(event) => {
             setUsername(event.target.value);
           }}
         />
+        <label className="label-img" htmlFor="input-password-login">Remplir le champ du nom d'utilisateur</label>
         <input
+          id="input-password-login"
           type="password"
           placeholder="Mot de passe..."
           onChange={(event) => {
             setPassword(event.target.value);
           }}
         />
-        <button onClick={login}>Se connecter</button>
+        <button value="Connexion" onClick={login}>Se connecter</button>
       </div>
       <p className="msg-err">{errorMessage} </p>
-    </div>
+    </main>
   );
 }
 

@@ -13,6 +13,7 @@ function Home(props) {
   const [commentaire, setComments] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const token = localStorage.getItem("token");
+  const [ariaExpanded, setariaExpanded] = useState("false");
   const toggleComments = (idthread) => { setShowId(showId => showId === idthread ? null : idthread); };
 
   useEffect(() => {
@@ -54,6 +55,7 @@ function Home(props) {
   };
 
   const getComment = (idthread) => {
+    if(ariaExpanded === "true"){setariaExpanded("false")}else{setariaExpanded("true")}
     Axios.post("http://localhost:3001/thread/getComments", {
       idthread: idthread,
     }, {
@@ -77,14 +79,14 @@ function Home(props) {
 
 
   return (
-    <div className="Home">
+    <main className="Home">
       <h1>Les Dernières Publications :</h1>
       {uploads.map((val) => {
         if (val.image) {
           return (
-            <div className="Post" key={val.idthread} >
+            <article className="Post" key={val.idthread} >
               <div className="Image">
-                <Image alt={val.title} cloudName="dzbs5syc9" publicId={val.image} />
+                <Image alt={"Image de l'article " + val.title} cloudName="dzbs5syc9" publicId={val.image} />
               </div>
               <div className="Content">
                 <div className="title">
@@ -93,16 +95,18 @@ function Home(props) {
                 <div className="description">{val.description}</div>
               </div>
               <div className="Engagement">
-                <ThumbUpAltIcon id="likeButton" onClick={() => { likePost(val.idthread); }} />
+                <button className="btn-icons" aria-label="Bouton like" onClick={() => { likePost(val.idthread); }} ><ThumbUpAltIcon aria-hidden="false" id="likeButton" /></button>
                 <div className="counts">{val.likecount}</div>
-                <ChatIcon id="commentButton" onClick={function (event) { toggleComments(val.idthread); getComment(val.idthread); }} />
+                <button className="btn-icons" aria-expanded={ariaExpanded} aria-controls="send-com" onClick={function (event) { toggleComments(val.idthread); getComment(val.idthread); }} ><ChatIcon id="commentButton" /></button>
                 <div className="counts">{val.commentcount}</div>
               </div>
               {showId === val.idthread && (
                 <div className="comments">
                   {props.isLoggedIn ? (
-                    <div className="send-com">
+                    <div className="send-com" id="send-com">
+                      <label className="label-img" htmlFor="input-comment-id">Répondre à la publication</label>
                       <input
+                        id="input-comment-id"
                         className="input-comment"
                         value={commentaire}
                         type="text"
@@ -117,8 +121,8 @@ function Home(props) {
                   {threadComments.map((com, index) => {
                     return (
                       <div key={index} className="post-bottom">
-                        {com.avatar  === null &&(<img className="img-comment" src={avatar} alt="Logo" />)}
-                        {com.avatar  != null &&(<Image alt="avatar" cloudName="dzbs5syc9" publicId={com.avatar} className="img-comment" />)}
+                        {com.avatar === null && (<img className="img-comment" src={avatar} alt="Avatar du profil" />)}
+                        {com.avatar != null && (<Image alt="avatar" cloudName="dzbs5syc9" publicId={com.avatar} className="img-comment" />)}
                         <div className="comment">
                           <p className="userComment">{com.usercomment}</p>
                           <p>{com.comment}</p>
@@ -127,11 +131,11 @@ function Home(props) {
                   })}
                 </div>
               )}
-            </div>
+            </article>
           );
         } else {
           return (
-            <div className="Post" key={val.idthread}>
+            <article className="Post" key={val.idthread}>
               <div className="Content">
                 <div className="title-txt">
                   {val.title} / publié par {val.author} le {val.date.slice(0, 10)}
@@ -139,16 +143,18 @@ function Home(props) {
                 <div className="description">{val.description}</div>
               </div>
               <div className="Engagement">
-                <ThumbUpAltIcon id="likeButton" onClick={() => { likePost(val.idthread); }} />
+                <button className="btn-icons" aria-label="Bouton like" onClick={() => { likePost(val.idthread); }} ><ThumbUpAltIcon aria-hidden="false" id="likeButton" /></button>
                 <div className="counts">{val.likecount}</div>
-                <ChatIcon id="commentButton" onClick={function (event) { toggleComments(val.idthread); getComment(val.idthread); }} />
+                <button className="btn-icons" aria-expanded={ariaExpanded} aria-controls="send-com" onClick={function (event) { toggleComments(val.idthread); getComment(val.idthread); }} ><ChatIcon id="commentButton" /></button>
                 <div className="counts">{val.commentcount}</div>
               </div>
               {showId === val.idthread && ( // <-- check for index match
                 <div className="comments">
-                   {props.isLoggedIn ? (
-                    <div className="send-com">
+                  {props.isLoggedIn ? (
+                    <div className="send-com" id="send-com">
+                      <label className="label-img" htmlFor="input-comment-id">Répondre à la publication</label>
                       <input
+                        id="input-comment-id"
                         className="input-comment"
                         value={commentaire}
                         type="text"
@@ -163,8 +169,8 @@ function Home(props) {
                   {threadComments.map((com, index) => {
                     return (
                       <div key={index} className="post-bottom">
-                        {com.avatar  === null &&(<img className="img-comment" src={avatar} alt="Logo" />)}
-                        {com.avatar  != null &&(<Image alt="avatar" cloudName="dzbs5syc9" publicId={com.avatar} className="img-comment" />)}
+                        {com.avatar === null && (<img className="img-comment" src={avatar} alt="Avatar du profil" />)}
+                        {com.avatar != null && (<Image alt="avatar" cloudName="dzbs5syc9" publicId={com.avatar} className="img-comment" />)}
                         <div className="comment">
                           <p className="userComment">{com.usercomment}</p>
                           <p>{com.comment}</p>
@@ -173,11 +179,11 @@ function Home(props) {
                   })}
                 </div>
               )}
-            </div>
+            </article>
           );
         }
       })}
-    </div>
+    </main>
   );
 }
 

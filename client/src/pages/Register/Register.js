@@ -46,28 +46,32 @@ function Register() {
   };
 
   return (
-    <div className="Register">
-      <img className="navbar-img" src={background} alt="Logo" />
+    <main className="Register">
+      <img className="navbar-img" src={background} alt="Logo de Groupomania" />
       <h1>Inscription</h1>
       <div className="RegisterForm">
+        <label className="label-img" htmlFor="input-username-register">Choisir un nom d'utilisateur</label>
         <input
+          id="input-username-register"
           type="text"
           placeholder="Nom d'utilisateur..."
           onChange={(event) => {
             setUsername(event.target.value);
           }}
         />
+        <label className="label-img" htmlFor="input-password-register">Choisir un mot de passe</label>
         <input
+          id="input-password-register"
           type="password"
           placeholder="Mot de passe..."
           onChange={(event) => {
             setPassword(event.target.value);
           }}
         />
-        <button onClick={register}>S'inscrire</button>
+        <button value="Inscription" onClick={register}>S'inscrire</button>
       </div>
       <p className="msg-err">{errorMessage}</p>
-    </div>
+    </main>
   );
 }
 

@@ -67,7 +67,7 @@ exports.login = (req, res) => {
 };
 
 exports.delete = (req, res) => {
-  const username = req.body.username;
+  const username = req.user.userName;
   db.query(
     "DELETE FROM User WHERE username = ?;",
     username,

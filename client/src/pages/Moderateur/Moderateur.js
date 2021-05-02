@@ -15,6 +15,7 @@ function Moderateur() {
   const username = localStorage.getItem("username");
   const toggleComments = (idthread) => { setShowId(showId => showId === idthread ? null : idthread); };
   const [threadComments, setThreadcomments] = useState([]);
+  const [ariaExpanded, setariaExpanded] = useState("false");
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -40,6 +41,7 @@ function Moderateur() {
   };
 
   const getComment = (idthread) => {
+    if(ariaExpanded === "true"){setariaExpanded("false")}else{setariaExpanded("true")}
     Axios.post("http://localhost:3001/thread/getComments", {
       idthread: idthread,
     }, {
@@ -65,9 +67,9 @@ function Moderateur() {
   };
 
   return (
-    <div className="moderateur">
+    <main className="moderateur">
       <div className="moderateur-top">
-        <img className="img-moderateur" src={avatar} alt="Logo" />
+        <img className="img-moderateur" src={avatar} alt="Avatar du profil" />
         <h1>Modérateur</h1>
       </div>
       <h2>Gérer les publications :</h2>
@@ -75,28 +77,27 @@ function Moderateur() {
         if (val.image) {
           return (
             <div className="moderateur" key={val.idthread}>
-              <div className="Post">
+              <article className="Post">
                 <div className="Image">
-                  <Image alt={val.title} cloudName="dzbs5syc9" publicId={val.image} />
+                  <Image alt={"Image de l'article " + val.title} cloudName="dzbs5syc9" publicId={val.image} />
                 </div>
                 <div className="Content">
                   <div className="title">
-                    {" "}
                     {val.title} / publié par {val.author} le {val.date.slice(0, 10)}
                   </div>
                   <div className="description">{val.description}</div>
                   <div className="Engagement">
                     <ThumbUpAltIcon id="likeButton" />
                     {val.likecount}
-                    <ChatIcon id="commentButton" onClick={function (event) { toggleComments(val.idthread); getComment(val.idthread); }} />
+                    <button className="btn-icons" aria-expanded={ariaExpanded} aria-controls="send-com" onClick={function (event) { toggleComments(val.idthread); getComment(val.idthread); }} ><ChatIcon id="commentButton"/></button>
                     <div className="counts">{val.commentcount}</div>
                   </div>
                   {showId === val.idthread && (
-                    <div className="comments">
+                    <div className="comments" id="send-com">
                       {threadComments.map((com, index) => {
                         return (
                           <div key={index} className="post-bottom">
-                            {com.avatar === null && (<img className="img-comment" src={avatar} alt="Logo" />)}
+                            {com.avatar === null && (<img className="img-comment" src={avatar} alt="Avatar du profil" />)}
                             {com.avatar != null && (<Image alt="avatar" cloudName="dzbs5syc9" publicId={com.avatar} className="img-comment" />)}
                             <div className="comment">
                               <p className="userComment">{com.usercomment}</p>
@@ -108,7 +109,7 @@ function Moderateur() {
                     </div>
                   )}
                 </div>
-              </div>
+              </article>
               <div className="buttons">
                 <button className="btn-post" onClick={() => { deleteThread(val.idthread, key) }}>Supprimer</button>
               </div>
@@ -117,24 +118,24 @@ function Moderateur() {
         } else {
           return (
             <div className="moderateur" key={val.idthread}>
-              <div className="Post">
+              <article className="Post">
                 <div className="Content">
                   <div className="title">
                     {val.title} / publié par {val.author} le {val.date.slice(0, 10)}
                   </div>
                   <div className="description">{val.description}</div>
                   <div className="Engagement">
-                    <ThumbUpAltIcon id="likeButton" />
+                    <ThumbUpAltIcon id="likeButton"/>
                     {val.likecount}
-                    <ChatIcon id="commentButton" onClick={function (event) { toggleComments(val.idthread); getComment(val.idthread); }} />
+                    <button className="btn-icons" aria-expanded={ariaExpanded} aria-controls="send-com" onClick={function (event) { toggleComments(val.idthread); getComment(val.idthread); }} ><ChatIcon id="commentButton"/></button>
                     <div className="counts">{val.commentcount}</div>
                   </div>
                   {showId === val.idthread && (
-                    <div className="comments">
+                    <div className="comments" id="send-com">
                       {threadComments.map((com, index) => {
                         return (
                           <div key={index} className="post-bottom">
-                            {com.avatar === null && (<img className="img-comment" src={avatar} alt="Logo" />)}
+                            {com.avatar === null && (<img className="img-comment" src={avatar} alt="Avatar du profil" />)}
                             {com.avatar != null && (<Image alt="avatar" cloudName="dzbs5syc9" publicId={com.avatar} className="img-comment" />)}
                             <div className="comment">
                               <p className="userComment">{com.usercomment}</p>
@@ -146,7 +147,7 @@ function Moderateur() {
                     </div>
                   )}
                 </div>
-              </div>
+              </article>
               <div className="buttons">
                 <button className="btn-post" onClick={() => { deleteThread(val.idthread, key); }}>Supprimer</button>
               </div>
@@ -154,7 +155,7 @@ function Moderateur() {
           );
         }
       })}
-    </div>
+    </main>
   );
 }
 

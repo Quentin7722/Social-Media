@@ -44,6 +44,7 @@
 }
 .img-profile{
     height:60px;
+    max-width: 60px;
     border-radius: 30px;
     margin-right: 40px;
 }
@@ -83,7 +84,7 @@
     border-radius: 25px;
     cursor: pointer;
     border: none;
-    background-color: red;
+    background-color: rgb(231, 4, 4);
     color: white;
     padding: 13px;
     font-size: 20px;
@@ -123,13 +124,14 @@
     border-radius: 35px;
     margin-left: 40PX;
 }
-.btn-profile:hover, .btn-post:hover, .btn-update:hover{
+.btn-profile:hover, .btn-post:hover, .btn-update:hover, .btn-profile:focus, .btn-post:focus, .btn-update:focus{
     cursor: pointer;
     transform: scale(1.1);
 }
 
 .Profile h1{
-    color: aliceblue;
+    color: rgb(0 23 45);
+    font-family: 'Oleo Script', cursive;
     font-size: 35px;
     text-decoration: underline;
     margin-top: 10px;
