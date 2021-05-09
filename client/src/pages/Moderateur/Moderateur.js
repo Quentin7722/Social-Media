@@ -36,7 +36,7 @@ function Moderateur() {
         image: image
       }
     }).then((response) => {
-      setYourUploads(response.data);
+      setYourUploads(response.data[4]);
     });
   };
 
@@ -89,7 +89,7 @@ function Moderateur() {
                   <div className="Engagement">
                     <ThumbUpAltIcon id="likeButton" />
                     {val.likecount}
-                    <button className="btn-icons" aria-expanded={ariaExpanded} aria-controls="send-com" onClick={function (event) { toggleComments(val.idthread); getComment(val.idthread); }} ><ChatIcon id="commentButton"/></button>
+                    <button className="btn-icons" aria-expanded={ariaExpanded} aria-label="Comments" aria-controls="send-com" onClick={function (event) { toggleComments(val.idthread); getComment(val.idthread); }} ><ChatIcon id="commentButton"/></button>
                     <div className="counts">{val.commentcount}</div>
                   </div>
                   {showId === val.idthread && (

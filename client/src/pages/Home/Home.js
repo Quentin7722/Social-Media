@@ -145,7 +145,7 @@ function Home(props) {
               <div className="Engagement">
                 <button className="btn-icons" aria-label="Bouton like" onClick={() => { likePost(val.idthread); }} ><ThumbUpAltIcon aria-hidden="false" id="likeButton" /></button>
                 <div className="counts">{val.likecount}</div>
-                <button className="btn-icons" aria-expanded={ariaExpanded} aria-controls="send-com" onClick={function (event) { toggleComments(val.idthread); getComment(val.idthread); }} ><ChatIcon id="commentButton" /></button>
+                <button className="btn-icons" aria-expanded={ariaExpanded} aria-label="Comments" aria-controls="send-com" onClick={function (event) { toggleComments(val.idthread); getComment(val.idthread); }} ><ChatIcon id="commentButton" /></button>
                 <div className="counts">{val.commentcount}</div>
               </div>
               {showId === val.idthread && ( // <-- check for index match

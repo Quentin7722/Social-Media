@@ -69,7 +69,7 @@ function Profile() {
         image: image
       }
     }).then((response) => {
-      setYourUploads(response.data);
+      setYourUploads(response.data[3]);
     });
   };
 

@@ -110,9 +110,9 @@ exports.delete = (req, res) => {
       console.log(err, results);
       if (req.user.role == "moderateur" || userName == results[0].author) {
         cloudinary.uploader.destroy(publicId, function (result) { console.log(result) })
-        db.query('DELETE FROM thread WHERE idthread = ?; DELETE FROM comments WHERE threadcomment =?; DELETE FROM likes WHERE threadid =?; SELECT * FROM thread WHERE author = ?', [idthread, idthread, idthread, userName], function (err, results) {
+        db.query('DELETE FROM thread WHERE idthread = ?; DELETE FROM comments WHERE threadcomment =?; DELETE FROM likes WHERE threadid =?; SELECT * FROM thread WHERE author = ?; SELECT * FROM thread', [idthread, idthread, idthread, userName], function (err, results) {
           if (err) throw err;
-          res.send(results[3]);
+          res.send(results);
         });
       }
     })
