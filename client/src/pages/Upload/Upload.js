@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import "./Upload.css";
 import Axios from "axios";
 import { useHistory } from "react-router-dom";
@@ -9,10 +9,12 @@ function Upload() {
   const [image, setImage] = useState([]);
   const token = localStorage.getItem("token");
   const [errorMessage, setErrorMessage] = useState("");
+  const reference = useRef();
 
   let history = useHistory();
 
   const upload = () => {
+    reference.current.setAttribute("disabled", "disabled");
     const formData = new FormData();
     formData.append("file", image[0]);
     formData.append("upload_preset", "h0vs2ijr");
@@ -93,7 +95,7 @@ function Upload() {
         </textarea>
         <label className="label-img" htmlFor="file">Choisir une image</label>
         <input id ="file" className="img-input" type="file" onChange={(e) => setImage(e.target.files)} />
-        <button value="Publication" onClick={upload}>Publier</button>
+        <button ref={reference} value="Publication" onClick={() => upload()}>Publier</button>
       </article>
       <p className="msg-err">{errorMessage} </p>
     </main>
