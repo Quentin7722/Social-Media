@@ -19,7 +19,7 @@ Executez la commande ``npm install --global yarn`` pour utiliser Yarn sur votre 
 
 ## Démarrage
 
-Executez la commande ``yarn start`` pour lancer l'application front-end et la commande ``node server`` pour l'application back-end.
+Executez la commande ``yarn start`` depuis le répertoire "client" pour lancer l'application front-end et la commande ``node server`` depuis le répertoire "serveur" pour l'application back-end.
 
 ## Fabriqué avec
 
