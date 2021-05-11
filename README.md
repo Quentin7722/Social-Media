@@ -6,7 +6,7 @@ Réseau social interne pour l'entreprise Groupomania
 
 ## Pour commencer
 
-Ajoutez la clé secrète du token, les informations de la base de donnée et les informations de la plateforme Cloudinary au fichier "exemple.env" dans le répertoire "serveur" puis renommer le fichier .env.
+Ajoutez la clé secrète du token, les informations de la base de donnée et les informations de la plateforme Cloudinary au fichier "exemple.env" dans le répertoire "serveur" puis renommer le fichier ".env".
 
 ### Pré-requis
 
