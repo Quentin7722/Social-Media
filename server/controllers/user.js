@@ -9,7 +9,7 @@ exports.register = (req, res) => {
         return /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/.test(password);
       }
       if (!isPassword(req.body.password)) {
-        res.status(400).send({ message: "Votre mot de passe doit contenir au moins 8 caractères, une majuscule et un caractère spécial" });
+        res.status(400).send({ message: "Votre mot de passe doit contenir au moins 8 caractères, une majuscule, un caractère spécial et au moins un chiffre" });
       } else {
         const username = req.body.username;
         const role = "basic";
