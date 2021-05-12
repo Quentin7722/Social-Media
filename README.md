@@ -15,11 +15,11 @@ Ajoutez la clé secrète du token, les informations de la base de donnée et les
 
 ### Installation
 
-Executez la commande ``npm install --global yarn`` dans un terminal pour utiliser Yarn sur votre ordinateur local et la commande ``yarn install`` depuis les répertoires "client" et "serveur" pour installer les applications front-end et back-end. Mettez en place la base de donnée en commencant par vous connecter à MySQL et en créant un nouveau schema avec la commande ``CREATE DATABASE groupomania;``. Ensuite importer le fichier Dump.sql grâce à l'invite de commande en ajoutant le chemin vers MySQL pour vous connecter et en utilisant la commande ``mysql -u username -p groupomania < Dump.sql`` depuis le répertoire où se trouve le fichier.
+Executez la commande ``npm install --global yarn`` dans un terminal pour utiliser Yarn sur votre ordinateur local et la commande ``yarn install`` depuis les répertoires "client" et "server" pour installer les applications front-end et back-end. Mettez en place la base de donnée en commencant par vous connecter à MySQL et en créant un nouveau schema avec la commande ``CREATE DATABASE groupomania;``. Ensuite importer le fichier Dump.sql grâce à l'invite de commande en ajoutant le chemin vers MySQL pour vous connecter et en utilisant la commande ``mysql -u username -p groupomania < Dump.sql`` depuis le répertoire où se trouve le fichier.
 
 ## Démarrage
 
-Executez la commande ``yarn start`` dans un terminal depuis le répertoire "client" pour lancer l'application front-end et la commande ``node server`` depuis le répertoire "serveur" pour l'application back-end.
+Executez la commande ``yarn start`` dans un terminal depuis le répertoire "client" pour lancer l'application front-end et la commande ``node server`` depuis le répertoire "server" pour l'application back-end.
 
 ## Fabriqué avec
 
