@@ -1,0 +1,102 @@
+.Upload {
+    width: 100%;
+    height: 750px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.UploadForm {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    padding: 25px;
+    border-radius: 5%;
+}
+
+.UploadForm input{
+    margin: 10px;
+    width: auto;
+    height: 50px;
+    font-size: 20px;
+    border-radius: 25px;
+    padding: 20px;
+    border: none;
+    background-color: #EBF0FC;
+    font-family: monospace;
+    transition: 0.3s;
+}
+
+.UploadForm input:focus, textarea:focus{ 
+    outline: none; 
+    transform: scale(1.02);
+    box-shadow: 0 0 10px 5px rgb(132, 132, 209);
+    outline-offset: 10px; 
+}
+
+.UploadForm .description-input{
+    margin: 10px;
+    width: auto;
+    height: 150px;
+    font-size: 20px;
+    border-radius: 25px;
+    padding: 20px;
+    border: none;
+    background-color: #EBF0FC; 
+}
+
+.UploadForm .img-input{
+    background-color: white; 
+    font-family: inherit;
+}
+
+.UploadForm button{
+    margin-top: 35px;
+    cursor: pointer;
+    border: none;
+    background-color: #0011ff;
+    border-radius: 25px;
+    color: white;
+    padding: 10px;
+    font-size: 20px;
+    outline: none;
+}
+
+.UploadForm button:hover, .UploadForm button:focus{
+    cursor: pointer;
+    background-color: #010ec4;
+}
+
+.label-img{
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+}
+h1 {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    color: black;
+    text-align: center;
+    margin-bottom: 15px;
+}
+textarea {
+    resize: none;
+}
+
+
+@media screen and (min-width: 200px) and (max-width: 400px) {
+    
+    .UploadForm{
+        width: 350px;
+    } 
+    .UploadForm .img-input{
+        width: auto;
+        font-size: 12px;
+    }
+  
+}

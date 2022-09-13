@@ -1,0 +1,170 @@
+.moderateur {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.moderateur .Post {
+    background-color: whitesmoke;
+    width: 500px;
+    height: auto;
+    border: 2px solid white;
+    display: flex;
+    flex-direction: column;
+    margin: 50px;
+    transition: transform .2s;
+    box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+}
+
+.moderateur .Post .Image{
+    flex: 70%;
+   
+}
+
+.moderateur .Post .Image img {
+    width: 100%;
+    height: 400px;
+}
+
+.moderateur .Post .Content{
+    flex: 30%;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+
+}
+.icon-delete{
+    color: rgb(231, 4, 4);
+    padding: 12px 0 0 10px;
+    border: none;
+    cursor: pointer;
+    outline: none;
+}
+.icon-delete:hover,.icon-delete:focus  {animation: wiggle 3s infinite;} 
+.moderateur .Post .Content .title {
+    flex: 30%;
+    text-align: center;
+    font-size: 20px;
+}
+.img-moderateur{
+    height:60px;
+    border-radius: 30px;
+    margin-right: 20px;
+}
+.moderateur .Post .Content .description {
+    flex: 50%;
+    text-align: center;
+
+}
+
+.moderateur .Post .Engagement {
+    flex: 20%;
+    display: grid;
+    place-items: center;
+}
+.moderateur .Post .Engagement #likeButton {
+    font-size: 40px;
+     color: grey;
+
+}
+.moderateur .Post .Engagement #likeButton:active{
+    color: black;
+
+}
+.moderateur .moderateur-top{
+    justify-content: center;
+    padding: 25px;
+    background-color: rgb(150, 144, 230);
+    margin-top: 50px;
+    display: flex;
+    border-radius: 10px;
+}
+.btn-moderateur, .btn-post{
+    border-radius: 25px;
+    cursor: pointer;
+    border: none;
+    background-color: rgb(231, 4, 4);
+    color: white;
+    padding: 13px;
+    font-size: 20px;
+    transition: transform .2s;
+    outline: none;
+}
+.btn-post{
+    width: 150px;
+    margin-right: 15px;
+}
+.btn-update{
+    width: 150px;
+    border-radius: 25px;
+    cursor: pointer;
+    border: none;
+    background-color: blue;
+    color: white;
+    padding: 13px;
+    font-size: 20px;
+    transition: transform .2s;
+    outline: none;
+}
+.btn-moderateur{
+    border-radius: 35px;
+    margin-left: 40PX;
+}
+
+.moderateur h1{
+    color: rgb(0 23 45);
+    font-family: 'Oleo Script', cursive;
+    margin-top: 10px;
+}
+.moderateur h2{
+    margin-top: 40px;
+    color: rgb(155, 183, 209);
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+.moderateur .Post .Engagement {
+    flex: 20%;
+    display: flex;
+    place-items: center;
+    justify-content: center;
+}
+
+.moderateur .Post .Engagement #likeButton {
+    font-size: 40px;
+     color: rgb(100, 136, 160);
+}
+.moderateur .buttons{
+    display: flex;
+}
+
+@keyframes wiggle{
+    0%{transform: rotate(0deg);}
+    3%{transform: rotate(-8deg);}
+    4%{transform: rotate(8deg);}
+    5%{transform: rotate(0deg);}
+    100%{transform: rotate(0deg);}
+}
+
+@media screen and (min-width: 300px) and (max-width: 650px){
+    .moderateur .Post .Content .title{
+        font-size: 18px;
+    }
+    .moderateur .Post{
+        width: 300px;
+    }
+    .moderateur .Post .Image img {
+        height: 250px;
+    }
+    .moderateur .moderateur-top{
+        width: 100%;
+        border-radius: 0px;
+    }
+    .btn-moderateur{
+        font-size: 15px;
+    }
+    .img-moderateur{
+        margin-right: 10px;
+    }
+}

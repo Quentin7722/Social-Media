@@ -1,0 +1,62 @@
+.Login {
+    width: 100%;
+    height: 750px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.LoginForm {
+    display: flex;
+    flex-direction: column;
+}
+
+.Login .LoginForm input{
+    margin: 10px;
+    width: auto;
+    height: 50px;
+    font-size: 20px;
+    border-radius: 25px;
+    padding: 20px;
+    border: none;
+    background-color: #EBF0FC;
+    font-family: monospace;
+    transition: 0.3s;
+}
+
+.LoginForm button{
+    margin-top: 35px;
+    cursor: pointer;
+    border: none;
+    background-color: #0011ff;
+    border-radius: 25px;
+    color: white;
+    padding: 10px;
+    font-size: 20px;
+    outline: none;
+}
+
+.LoginForm button:hover, .LoginForm button:focus{
+    cursor: pointer;
+    background-color: #010ec4;
+}
+
+.LoginForm input:focus, textarea:focus{
+    outline: none; 
+    transform: scale(1.08);
+    box-shadow: 0 0 10px 10px rgb(31, 31, 199);
+    outline-offset: 10px;
+}
+
+.Login h1 {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    color: rgb(155, 183, 209);
+}
+
+.msg-err{
+    font-size: 25px;
+    margin-top: 10px;
+    color: rgb(155, 183, 209);
+    text-align: center;
+}
